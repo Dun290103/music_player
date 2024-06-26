@@ -38,10 +38,10 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MusicAdapter.MyViewHolder holder, int position) {
-        MusicList list2 = list.get(position);
+        MusicList list2 = list.get(holder.getAdapterPosition());
 
         if (list2.isPlaying()) {
-            playingPosition = position;
+            playingPosition = holder.getAdapterPosition();
             holder.rootLayout.setBackgroundResource(R.drawable.round_back_blue_10);
         } else {
             holder.rootLayout.setBackgroundResource(R.drawable.round_back_10);
@@ -61,8 +61,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
             public void onClick(View v) {
                 list.get(playingPosition).setPlaying(false);
                 list2.setPlaying(true);
-
-                songChangeListener.onSongChanged(position);
+                songChangeListener.onSongChanged(holder.getAdapterPosition());
 
                 notifyDataSetChanged();
             }
